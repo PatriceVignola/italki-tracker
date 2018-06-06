@@ -30,9 +30,14 @@ class App extends React.Component<{}> {
   }
 
   render() {
+    const baseUrl: string = (process.env.PUBLIC_URL: any);
+
+    /* eslint-disable */
+    console.log(`Public Url: ${baseUrl}`);
+    /* eslint-enable */
     return (
       <Provider store={this.store}>
-        <BrowserRouter>
+        <BrowserRouter basename={baseUrl}>
           <div>
             <Switch>
               <Route exact path="/" component={StudentListScreen} />

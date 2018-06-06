@@ -4,18 +4,44 @@
  */
 
 import React from 'react';
+import {Provider} from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import type {Store} from 'redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="App-title">Welcome to React</h1>
-      </header>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
-    </div>
-  );
+import reducers from './reducers';
+import StudentListScreen from './components/ConnectedStudentList';
+import type {Action} from './actions/types';
+
+const initialState = {};
+
+class App extends React.Component<{}> {
+  store: Store<Object, Action>;
+
+  constructor() {
+    super();
+
+    this.store = createStore(
+      reducers,
+      initialState,
+      applyMiddleware(thunk),
+    );
+  }
+
+  render() {
+    return (
+      <Provider store={this.store}>
+        <BrowserRouter>
+          <div>
+            <Switch>
+              <Route exact path="/" component={StudentListScreen} />
+            </Switch>
+          </div>
+        </BrowserRouter>
+      </Provider>
+    );
+  }
 }
 
 export default App;

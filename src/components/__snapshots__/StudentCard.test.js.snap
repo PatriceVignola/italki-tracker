@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StudentList renders correctly 1`] = `
+<WithStyles(Paper)>
+  <WithStyles(Card)
+    style={
+      Object {
+        "height": 500,
+      }
+    }
+  >
+    <WithStyles(CardMedia)
+      image="http://education.mnhs.org/immigration/sites/education.mnhs.org.immigration/files/imagecache/Full_800x800/MaleSilhouette_5.png"
+      style={
+        Object {
+          "height": 300,
+        }
+      }
+    />
+    <WithStyles(CardContent)>
+      <WithStyles(Typography)
+        component="h2"
+        gutterBottom={true}
+        variant="headline"
+      >
+        FirstName LastName
+      </WithStyles(Typography)>
+      <WithStyles(Typography)
+        component="p"
+      >
+        Description here (e.g. level, number of classes, etc.)
+      </WithStyles(Typography)>
+    </WithStyles(CardContent)>
+    <WithStyles(CardActions)>
+      <WithStyles(Button)
+        color="primary"
+        size="small"
+      >
+        Cancel
+      </WithStyles(Button)>
+      <WithStyles(Button)
+        color="primary"
+        size="small"
+      >
+        OK
+      </WithStyles(Button)>
+    </WithStyles(CardActions)>
+  </WithStyles(Card)>
+</WithStyles(Paper)>
+`;

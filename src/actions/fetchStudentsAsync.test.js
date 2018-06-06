@@ -24,14 +24,13 @@ describe('fetchStudentsAsync', () => {
 
     const store = mockStore({});
 
-    return store.dispatch(fetchStudentsAsync())
-      .then(() => {
-        const expectedActions = store.getActions();
-        expect(expectedActions).toHaveLength(1);
-        expect(expectedActions).toContainEqual({
-          type: 'FETCHED_STUDENTS',
-          students: mockStudents,
-        });
+    return store.dispatch(fetchStudentsAsync()).then(() => {
+      const expectedActions = store.getActions();
+      expect(expectedActions).toHaveLength(1);
+      expect(expectedActions).toContainEqual({
+        type: 'FETCHED_STUDENTS',
+        students: mockStudents,
       });
+    });
   });
 });

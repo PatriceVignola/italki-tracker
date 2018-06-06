@@ -7,7 +7,10 @@ import type {Student, Action} from '../actions/types';
 
 const initialState = [];
 
-function reduceStudents(state: Student[] = initialState, action: Action): Student[] {
+function reduceStudents(
+  state: Student[] = initialState,
+  action: Action,
+): Student[] {
   if (action.type === 'FETCHED_STUDENTS') {
     return action.students;
   }

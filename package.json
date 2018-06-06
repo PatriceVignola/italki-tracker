@@ -11,14 +11,15 @@
   },
   "scripts": {
     "prettier": "prettier es6 --write src/**/*.js",
+    "lint": "eslint .",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "flow": "flow",
     "test": "jest --coverage --setupTestFrameworkScriptFile=raf/polyfill",
     "push-coverage": "coveralls < coverage/lcov.info",
     "predeploy": "yarn run build",
-    "validate": "run-p flow build test --silent",
-    "deploy": "yarn validate && gh-pages -d build -m 'Deploy to gh-pages'",
+    "validate": "run-p lint flow build test --silent",
+    "deploy": "yarn prettier && yarn validate && gh-pages -d build -m 'Deploy to gh-pages'",
     "eject": "react-scripts eject"
   },
   "husky": {
@@ -28,6 +29,13 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-flowtype": "^2.49.3",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.9.1",
     "flow-bin": "^0.73.0",
     "flow-typed": "^2.4.0",
     "gh-pages": "^1.2.0",

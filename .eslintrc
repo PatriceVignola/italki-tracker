@@ -1,0 +1,30 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "plugin:flowtype/recommended"],
+  "plugins": [
+    "react",
+    "import",
+    "flowtype",
+    "prettier",
+  ],
+  "env": {
+    "jest": true,
+    "browser": true,
+  },
+  "rules": {
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx"] }],
+    "no-use-before-define": [2, { "variables": false, "functions": false }],
+    "react/sort-comp": [1, {
+      order: [
+        "type-annotations",
+        "static-methods",
+        "lifecycle",
+        "everything-else",
+        "render",
+      ],
+    }],
+    "no-unused-expressions": [2, { "allowShortCircuit": true }],
+    "prettier/prettier": [2, "fb", "@format"],
+  },
+}
+

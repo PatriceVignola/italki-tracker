@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TopAppBar renders correctly 1`] = `
+<WithStyles(AppBar)
+  position="static"
+>
+  <WithStyles(Toolbar)>
+    <WithStyles(IconButton)
+      aria-label="Menu"
+      color="inherit"
+      onClick={[Function]}
+      style={
+        Object {
+          "marginLeft": -12,
+          "marginRight": 20,
+        }
+      }
+    >
+      <pure(Menu) />
+    </WithStyles(IconButton)>
+    <WithStyles(Typography)
+      color="inherit"
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+      variant="title"
+    >
+      Italki Tracker
+    </WithStyles(Typography)>
+  </WithStyles(Toolbar)>
+</WithStyles(AppBar)>
+`;

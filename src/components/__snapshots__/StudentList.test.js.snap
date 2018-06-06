@@ -1,20 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StudentList renders correctly 1`] = `
-<WithStyles(GridWrapper)
-  container={true}
-  spacing={16}
->
-  <StudentCard
-    key="1"
-    student={
+<div>
+  <WithStyles(Typography)
+    style={
       Object {
-        "firstName": "FirstName",
-        "id": 1,
-        "lastName": "LastName",
-        "photoUrl": "http://education.mnhs.org/immigration/sites/education.mnhs.org.immigration/files/imagecache/Full_800x800/MaleSilhouette_5.png",
+        "marginBottom": 25,
+        "marginTop": 25,
       }
     }
-  />
-</WithStyles(GridWrapper)>
+    variant="title"
+  >
+    Students
+  </WithStyles(Typography)>
+  <GridWrapper
+    container={true}
+    spacing={16}
+    style={
+      Object {
+        "margin": 5,
+      }
+    }
+  >
+    <StudentCard
+      key="1"
+      student={
+        Object {
+          "firstName": "FirstName",
+          "id": 1,
+          "lastName": "LastName",
+          "photoUrl": "http://education.mnhs.org/immigration/sites/education.mnhs.org.immigration/files/imagecache/Full_800x800/MaleSilhouette_5.png",
+        }
+      }
+    />
+  </GridWrapper>
+</div>
 `;

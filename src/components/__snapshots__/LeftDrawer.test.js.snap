@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LeftDrawer renders correctly 1`] = `
+<WithStyles(Drawer)
+  onClose={[Function]}
+  open={true}
+>
+  <div
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    <WithStyles(List)
+      style={
+        Object {
+          "minWidth": 300,
+        }
+      }
+    >
+      <WithStyles(ListItem)
+        style={
+          Object {
+            "marginBottom": 10,
+            "marginTop": 5,
+          }
+        }
+      >
+        <WithStyles(Typography)
+          variant="title"
+        >
+          Italki Tracker
+        </WithStyles(Typography)>
+      </WithStyles(ListItem)>
+      <WithStyles(Divider) />
+      <WithStyles(ListItem)
+        button={true}
+      >
+        <WithStyles(ListItemIcon)>
+          <pure(People) />
+        </WithStyles(ListItemIcon)>
+        <WithStyles(ListItemText)
+          primary="Students"
+        />
+      </WithStyles(ListItem)>
+    </WithStyles(List)>
+  </div>
+</WithStyles(Drawer)>
+`;

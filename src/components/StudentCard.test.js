@@ -8,7 +8,7 @@ import {shallow} from 'enzyme';
 
 import StudentCard from './StudentCard';
 
-describe('StudentList', () => {
+describe('StudentCard', () => {
   it('renders correctly', () => {
     const mockStudent = {
       id: 1,

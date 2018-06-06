@@ -12,7 +12,7 @@ import {
   CardMedia,
   Paper,
   Typography,
-} from 'material-ui';
+} from '@material-ui/core';
 
 import type {Student} from '../actions/types';
 

@@ -32,9 +32,7 @@ function LeftDrawer(props: Props) {
       >
         <List style={styles.list}>
           <ListItem style={styles.title}>
-            <Typography variant="title">
-              Italki Tracker
-            </Typography>
+            <Typography variant="title">Italki Tracker</Typography>
           </ListItem>
           <Divider />
           <ListItem button>

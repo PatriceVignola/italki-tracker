@@ -1,7 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StudentList renders correctly 1`] = `
-<div>
+<div
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
   <WithStyles(Typography)
     style={
       Object {
@@ -34,5 +40,14 @@ exports[`StudentList renders correctly 1`] = `
       }
     />
   </GridWrapper>
+  <AddStudentButton
+    style={
+      Object {
+        "bottom": 24,
+        "position": "absolute",
+        "right": 24,
+      }
+    }
+  />
 </div>
 `;

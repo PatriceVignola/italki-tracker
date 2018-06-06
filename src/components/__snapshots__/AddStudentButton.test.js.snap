@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddStudentButton renders correctly 1`] = `
+<WithStyles(Button)
+  aria-label="add"
+  color="secondary"
+  variant="fab"
+>
+  <pure(Add) />
+</WithStyles(Button)>
+`;

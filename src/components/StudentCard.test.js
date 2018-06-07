@@ -11,11 +11,17 @@ import StudentCard from './StudentCard';
 describe('StudentCard', () => {
   it('renders correctly', () => {
     const mockStudent = {
-      id: 1,
-      firstName: 'FirstName',
-      lastName: 'LastName',
-      photoUrl:
-        'http://education.mnhs.org/immigration/sites/education.mnhs.org.immigration/files/imagecache/Full_800x800/MaleSilhouette_5.png',
+      italkiId: 1,
+      name: 'Etienne',
+      sex: 'Male',
+      location: 'Montreal, Canada',
+      learningLanguages: [],
+      languageSkills: [
+        {
+          language: 'English',
+          level: 1,
+        },
+      ],
     };
 
     const wrapper = shallow(<StudentCard student={mockStudent} />);

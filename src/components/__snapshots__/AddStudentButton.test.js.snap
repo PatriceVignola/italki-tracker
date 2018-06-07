@@ -4,6 +4,7 @@ exports[`AddStudentButton renders correctly 1`] = `
 <WithStyles(Button)
   aria-label="add"
   color="secondary"
+  onClick={[Function]}
   variant="fab"
 >
   <pure(Add) />

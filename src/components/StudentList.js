@@ -8,32 +8,42 @@ import {Grid, Typography} from '@material-ui/core';
 
 import StudentCard from './StudentCard';
 import AddStudentButton from './AddStudentButton';
+import ConnectedNewStudentForm from './ConnectedNewStudentForm';
 import type {Student} from '../actions/types';
 
 type Props = {
   students: Student[],
+  newStudentFormOpen: boolean,
+  onAddStudentClick: () => void,
+  onNewStudentFormClose: () => void,
 };
 
 function StudentList(props: Props) {
   return (
-    <div style={styles.container}>
+    <div>
       <Typography variant="title" style={styles.title}>
         Students
       </Typography>
       <Grid container spacing={16} style={styles.grid}>
         {props.students.map(student => (
-          <StudentCard key={student.id} student={student} />
+          <Grid item key={student.italkiId}>
+            <StudentCard student={student} />
+          </Grid>
         ))}
       </Grid>
-      <AddStudentButton style={styles.addButton} />
+      <ConnectedNewStudentForm
+        onClose={props.onNewStudentFormClose}
+        open={props.newStudentFormOpen}
+      />
+      <AddStudentButton
+        onClick={props.onAddStudentClick}
+        style={styles.addButton}
+      />
     </div>
   );
 }
 
 const styles = {
-  container: {
-    flex: 1,
-  },
   title: {
     marginTop: 25,
     marginBottom: 25,
@@ -42,7 +52,7 @@ const styles = {
     margin: 5,
   },
   addButton: {
-    position: 'absolute',
+    position: 'fixed',
     bottom: 24,
     right: 24,
   },

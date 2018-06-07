@@ -43,6 +43,16 @@ exports[`LeftDrawer renders correctly 1`] = `
           primary="Students"
         />
       </WithStyles(ListItem)>
+      <WithStyles(ListItem)
+        button={true}
+      >
+        <WithStyles(ListItemIcon)>
+          <pure(School) />
+        </WithStyles(ListItemIcon)>
+        <WithStyles(ListItemText)
+          primary="Courses"
+        />
+      </WithStyles(ListItem)>
     </WithStyles(List)>
   </div>
 </WithStyles(Drawer)>

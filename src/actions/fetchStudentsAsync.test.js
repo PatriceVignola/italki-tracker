@@ -14,11 +14,12 @@ describe('fetchStudentsAsync', () => {
   it('fetches the student list', () => {
     const mockStudents = [
       {
-        id: 1,
-        firstName: 'FirstName',
-        lastName: 'LastName',
-        photoUrl:
-          'http://education.mnhs.org/immigration/sites/education.mnhs.org.immigration/files/imagecache/Full_800x800/MaleSilhouette_5.png',
+        italkiId: 1,
+        languageSkills: [{language: 'English', level: 1}],
+        learningLanguages: [],
+        location: 'Montreal, Canada',
+        name: 'Etienne',
+        sex: 'Male',
       },
     ];
 

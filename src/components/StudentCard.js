@@ -14,6 +14,8 @@ import {
   Typography,
 } from '@material-ui/core';
 
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+
 import type {Student} from '../actions/types';
 
 type Props = {
@@ -24,13 +26,19 @@ function StudentCard(props: Props) {
   return (
     <Paper>
       <Card style={styles.card}>
-        <CardMedia style={styles.cardMedia} image={props.student.photoUrl} />
+        <CardMedia
+          style={styles.cardMedia}
+          image={
+            props.student.photoUrl ||
+            'http://getdrawings.com/img/male-silhouette-images-2.jpg'
+          }
+        />
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
-            {`${props.student.firstName} ${props.student.lastName}`}
+            {props.student.name}
           </Typography>
           <Typography component="p">
-            Description here (e.g. level, number of classes, etc.)
+            <LocationOnIcon />{props.student.location}
           </Typography>
         </CardContent>
         <CardActions>
@@ -52,7 +60,8 @@ const styles = {
     resizeMode: 'cover',
   },
   card: {
-    height: 500,
+    height: 450,
+    width: 300,
   },
   cardMedia: {
     height: 300,

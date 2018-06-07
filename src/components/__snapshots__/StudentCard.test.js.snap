@@ -5,12 +5,13 @@ exports[`StudentCard renders correctly 1`] = `
   <WithStyles(Card)
     style={
       Object {
-        "height": 500,
+        "height": 450,
+        "width": 300,
       }
     }
   >
     <WithStyles(CardMedia)
-      image="http://education.mnhs.org/immigration/sites/education.mnhs.org.immigration/files/imagecache/Full_800x800/MaleSilhouette_5.png"
+      image="http://getdrawings.com/img/male-silhouette-images-2.jpg"
       style={
         Object {
           "height": 300,
@@ -23,12 +24,13 @@ exports[`StudentCard renders correctly 1`] = `
         gutterBottom={true}
         variant="headline"
       >
-        FirstName LastName
+        Etienne
       </WithStyles(Typography)>
       <WithStyles(Typography)
         component="p"
       >
-        Description here (e.g. level, number of classes, etc.)
+        <pure(LocationOn) />
+        Montreal, Canada
       </WithStyles(Typography)>
     </WithStyles(CardContent)>
     <WithStyles(CardActions)>

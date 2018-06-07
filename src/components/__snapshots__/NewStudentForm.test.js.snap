@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewStudentForm renders correctly 1`] = `
+<WithStyles(Dialog)
+  aria-labelledby="form-dialog-title"
+  onClose={[Function]}
+  open={true}
+>
+  <WithStyles(DialogTitle)
+    id="form-dialog-title"
+  >
+    New Student
+  </WithStyles(DialogTitle)>
+  <WithStyles(DialogContent)>
+    <TextField
+      autoFocus={true}
+      fullWidth={true}
+      id="italkiId"
+      label="Italki ID"
+      margin="dense"
+      onChange={[Function]}
+      required={false}
+      select={false}
+    />
+    <TextField
+      fullWidth={true}
+      id="email"
+      label="Email Address"
+      margin="dense"
+      onChange={[Function]}
+      required={false}
+      select={false}
+      type="email"
+    />
+    <TextField
+      fullWidth={true}
+      id="skype"
+      label="Skype Account"
+      margin="dense"
+      onChange={[Function]}
+      required={false}
+      select={false}
+    />
+    <TextField
+      fullWidth={true}
+      id="wechat"
+      label="WeChat Account"
+      margin="dense"
+      onChange={[Function]}
+      required={false}
+      select={false}
+    />
+  </WithStyles(DialogContent)>
+  <WithStyles(DialogActions)>
+    <WithStyles(Button)
+      color="primary"
+      onClick={[Function]}
+    >
+      Cancel
+    </WithStyles(Button)>
+    <WithStyles(Button)
+      color="primary"
+      onClick={[Function]}
+    >
+      Save
+    </WithStyles(Button)>
+  </WithStyles(DialogActions)>
+</WithStyles(Dialog)>
+`;

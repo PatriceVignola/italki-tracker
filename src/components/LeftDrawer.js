@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core';
 
 import PeopleIcon from '@material-ui/icons/People';
+import SchoolIcon from '@material-ui/icons/School';
 
 type Props = {
   open: boolean,
@@ -40,6 +41,12 @@ function LeftDrawer(props: Props) {
               <PeopleIcon />
             </ListItemIcon>
             <ListItemText primary="Students" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <SchoolIcon />
+            </ListItemIcon>
+            <ListItemText primary="Courses" />
           </ListItem>
         </List>
       </div>

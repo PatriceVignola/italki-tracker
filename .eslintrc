@@ -1,6 +1,12 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "plugin:flowtype/recommended"],
+  "extends": [
+    "airbnb",
+    "plugin:flowtype/recommended",
+    "prettier",
+    "prettier/flowtype",
+    "prettier/react"
+  ],
   "plugins": [
     "react",
     "import",
@@ -25,10 +31,6 @@
     }],
     "no-unused-expressions": [2, { "allowShortCircuit": true }],
     "prettier/prettier": [2, "fb", "@format"],
-    "object-curly-spacing": [0],
-    "no-mixed-operators": [0],
-    "arrow-parens": [2, "as-needed", { "requireForBlockBody": false }],
-    "function-paren-newline": [0],
   },
 }
 

@@ -16,10 +16,7 @@ function reduceStudents(
   }
 
   if (action.type === 'ADDED_STUDENT') {
-    return [
-      ...state,
-      action.student
-    ];
+    return [...state, action.student];
   }
 
   return state;

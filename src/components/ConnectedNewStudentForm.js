@@ -37,7 +37,14 @@ const connectToStore = connect(
 );
 
 const setHandlers = withHandlers({
-  onSave: ({italkiId, email, skype, wechat, saveNewStudent, onClose}: Props) => () => {
+  onSave: ({
+    italkiId,
+    email,
+    skype,
+    wechat,
+    saveNewStudent,
+    onClose,
+  }: Props) => async () => {
     // TODO: Add loading indicator and "Undo" snack on the page
 
     // TODO: Fetch name, sex, location, photoUrl, learningLanguages,

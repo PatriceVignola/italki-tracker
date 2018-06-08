@@ -38,7 +38,8 @@ function StudentCard(props: Props) {
             {props.student.name}
           </Typography>
           <Typography component="p">
-            <LocationOnIcon />{props.student.location}
+            <LocationOnIcon />
+            {props.student.location}
           </Typography>
         </CardContent>
         <CardActions>

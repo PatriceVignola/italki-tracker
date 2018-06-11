@@ -2,7 +2,6 @@
 
 exports[`NewStudentForm renders correctly 1`] = `
 <WithStyles(Dialog)
-  aria-labelledby="form-dialog-title"
   onClose={[Function]}
   open={true}
 >
@@ -11,45 +10,72 @@ exports[`NewStudentForm renders correctly 1`] = `
   >
     New Student
   </WithStyles(DialogTitle)>
-  <WithStyles(DialogContent)>
-    <TextField
-      autoFocus={true}
-      fullWidth={true}
-      id="italkiId"
-      label="Italki ID"
-      margin="dense"
-      onChange={[Function]}
-      required={false}
-      select={false}
-    />
-    <TextField
-      fullWidth={true}
-      id="email"
-      label="Email Address"
-      margin="dense"
-      onChange={[Function]}
-      required={false}
-      select={false}
-      type="email"
-    />
-    <TextField
-      fullWidth={true}
-      id="skype"
-      label="Skype Account"
-      margin="dense"
-      onChange={[Function]}
-      required={false}
-      select={false}
-    />
-    <TextField
-      fullWidth={true}
-      id="wechat"
-      label="WeChat Account"
-      margin="dense"
-      onChange={[Function]}
-      required={false}
-      select={false}
-    />
+  <WithStyles(DialogContent)
+    style={
+      Object {
+        "display": "flex",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <TextField
+        autoFocus={true}
+        fullWidth={true}
+        id="italkiId"
+        label="Italki ID"
+        margin="dense"
+        onChange={[Function]}
+        required={false}
+        select={false}
+      />
+      <TextField
+        fullWidth={true}
+        id="email"
+        label="Email Address (Optional)"
+        margin="dense"
+        onChange={[Function]}
+        required={false}
+        select={false}
+        type="email"
+      />
+      <TextField
+        fullWidth={true}
+        id="skype"
+        label="Skype Account (Optional)"
+        margin="dense"
+        onChange={[Function]}
+        required={false}
+        select={false}
+      />
+      <TextField
+        fullWidth={true}
+        id="wechat"
+        label="WeChat Account (Optional)"
+        margin="dense"
+        onChange={[Function]}
+        required={false}
+        select={false}
+      />
+    </div>
+    <div
+      style={
+        Object {
+          "height": 200,
+          "margin": 20,
+          "width": 200,
+        }
+      }
+    >
+      <UserAvatar
+        userId={1}
+      />
+    </div>
   </WithStyles(DialogContent)>
   <WithStyles(DialogActions)>
     <WithStyles(Button)

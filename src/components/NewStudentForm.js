@@ -13,6 +13,8 @@ import {
   TextField,
 } from '@material-ui/core/';
 
+import UserAvatar from './UserAvatar';
+
 type Props = {
   open?: boolean,
   onClose: () => void,
@@ -21,51 +23,67 @@ type Props = {
   onEmailChange: (e: Object) => void,
   onSkypeChange: (e: Object) => void,
   onWechatChange: (e: Object) => void,
+  italkiId: number,
 };
 
 const defaultProps = {
   open: false,
 };
 
+const styles = {
+  container: {
+    display: 'flex',
+  },
+  leftDiv: {
+    flex: 1,
+  },
+  rightDiv: {
+    width: 200,
+    height: 200,
+    margin: 20,
+  },
+};
+
 function NewStudentForm(props: Props) {
   return (
-    <Dialog
-      open={props.open}
-      onClose={props.onClose}
-      aria-labelledby="form-dialog-title"
-    >
+    <Dialog open={props.open} onClose={props.onClose}>
       <DialogTitle id="form-dialog-title">New Student</DialogTitle>
-      <DialogContent>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="italkiId"
-          label="Italki ID"
-          onChange={props.onItalkiIdChange}
-          fullWidth
-        />
-        <TextField
-          margin="dense"
-          label="Email Address"
-          type="email"
-          id="email"
-          onChange={props.onEmailChange}
-          fullWidth
-        />
-        <TextField
-          margin="dense"
-          label="Skype Account"
-          id="skype"
-          onChange={props.onSkypeChange}
-          fullWidth
-        />
-        <TextField
-          margin="dense"
-          label="WeChat Account"
-          id="wechat"
-          onChange={props.onWechatChange}
-          fullWidth
-        />
+      <DialogContent style={styles.container}>
+        <div style={styles.leftDiv}>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="italkiId"
+            label="Italki ID"
+            onChange={props.onItalkiIdChange}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            label="Email Address (Optional)"
+            type="email"
+            id="email"
+            onChange={props.onEmailChange}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            label="Skype Account (Optional)"
+            id="skype"
+            onChange={props.onSkypeChange}
+            fullWidth
+          />
+          <TextField
+            margin="dense"
+            label="WeChat Account (Optional)"
+            id="wechat"
+            onChange={props.onWechatChange}
+            fullWidth
+          />
+        </div>
+        <div style={styles.rightDiv}>
+          <UserAvatar userId={props.italkiId} />
+        </div>
       </DialogContent>
       <DialogActions>
         <Button onClick={props.onClose} color="primary">

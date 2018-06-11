@@ -18,6 +18,7 @@ describe('NewStudentForm', () => {
       onEmailChange: () => {},
       onSkypeChange: () => {},
       onWechatChange: () => {},
+      italkiId: 1,
     };
 
     const wrapper = shallow(<NewStudentForm {...mockProps} />);

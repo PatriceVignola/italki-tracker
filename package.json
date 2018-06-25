@@ -6,16 +6,17 @@
   "scripts": {
     "lint": "eslint .",
     "start-server": "node scripts/start.js",
-    "start": "run-p watch-schema relay start-server",
-    "build": "yarn get-schema && node scripts/build.js",
-    "watch-schema": "yarn graphql get-schema --watch",
+    "start": "run-p watch-schema watch-relay start-server",
+    "build": "yarn relay && node scripts/build.js",
+    "watch-schema": "yarn get-schema --watch",
     "get-schema": "yarn graphql get-schema",
-    "relay": "yarn get-schema && relay-compiler --src ./src --schema ./schema.graphql --watch",
+    "watch-relay": "yarn relay --watch",
+    "relay": "relay-compiler --src ./src --schema ./schema.graphql",
     "flow": "flow",
     "test": "jest --coverage",
     "push-coverage": "coveralls < coverage/lcov.info",
     "predeploy": "yarn run build",
-    "validate": "run-p flow test --silent",
+    "validate": "yarn relay && run-p flow test --silent",
     "deploy": "yarn prettier && yarn validate && gh-pages -d build -m 'Deploy to gh-pages'"
   },
   "lint-staged": {

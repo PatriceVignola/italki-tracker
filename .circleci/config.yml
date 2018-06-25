@@ -26,7 +26,10 @@ jobs:
           name: Removing Cache Version file
           command: rm cache_version
       - run:
-          name: Testing, Linting, Static Checking and Building
+          name: Building
+          command: yarn build
+      - run:
+          name: Testing, Linting, Static Checking
           command: yarn validate
       - run:
           name: Generating Coveralls Report

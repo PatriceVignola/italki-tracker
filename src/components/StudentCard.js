@@ -5,67 +5,76 @@
 
 import React from 'react';
 import {
-  Button,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   Paper,
   Typography,
 } from '@material-ui/core';
 
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-
-import type {Student} from '../actions/types';
+import SchoolIcon from '@material-ui/icons/School';
 
 type Props = {
-  student: Student,
+  nickname: string,
+  languages: {
+    id: number,
+    name: string,
+  }[],
+  avatarUrl: ?string,
 };
 
 function StudentCard(props: Props) {
   return (
-    <Paper>
-      <Card style={styles.card}>
+    <Paper style={styles.container}>
+      <Card style={styles.container}>
         <CardMedia
           style={styles.cardMedia}
           image={
-            props.student.photoUrl ||
-            'http://getdrawings.com/img/male-silhouette-images-2.jpg'
+            props.avatarUrl ||
+            'https://www.italki.com/static/images/no_pic150.jpg'
           }
         />
         <CardContent>
-          <Typography gutterBottom variant="headline" component="h2">
-            {props.student.name}
+          <Typography
+            style={styles.text}
+            gutterBottom
+            variant="headline"
+            component="h2"
+          >
+            {props.nickname}
           </Typography>
-          <Typography component="p">
-            <LocationOnIcon />
-            {props.student.location}
+          <Typography component="p" style={styles.text}>
+            <SchoolIcon style={styles.schoolIcon} />
+            <span>Learning: </span>
+            {props.languages.map((language, index) => {
+              if (index < props.languages.length - 1) {
+                return <span key={language.id}>{language.name}, </span>;
+              }
+
+              return <span key={language.id}>{language.name}</span>;
+            })}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small" color="primary">
-            Cancel
-          </Button>
-          <Button size="small" color="primary">
-            OK
-          </Button>
-        </CardActions>
       </Card>
     </Paper>
   );
 }
 
 const styles = {
-  cover: {
+  container: {
+    width: '100%',
     height: '100%',
-    resizeMode: 'cover',
-  },
-  card: {
-    height: 450,
-    width: 300,
   },
   cardMedia: {
-    height: 300,
+    height: 250,
+  },
+  schoolIcon: {
+    marginRight: 10,
+  },
+  text: {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
 };
 

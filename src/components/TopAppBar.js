@@ -5,8 +5,9 @@
 
 import React from 'react';
 import {AppBar, Toolbar, IconButton, Typography} from '@material-ui/core';
-
 import MenuIcon from '@material-ui/icons/Menu';
+
+import UserProfileMenu from './UserProfileMenu';
 
 type Props = {
   onHamburgerClick: () => void,
@@ -27,6 +28,7 @@ function TopAppBar(props: Props) {
         <Typography variant="title" color="inherit" style={styles.title}>
           Italki Tracker
         </Typography>
+        <UserProfileMenu />
       </Toolbar>
     </AppBar>
   );
@@ -39,6 +41,10 @@ const styles = {
   },
   title: {
     flex: 1,
+  },
+  avatar: {
+    width: 32,
+    height: 32,
   },
 };
 

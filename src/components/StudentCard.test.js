@@ -11,20 +11,27 @@ import StudentCard from './StudentCard';
 describe('StudentCard', () => {
   it('renders correctly', () => {
     const mockStudent = {
-      italkiId: 1,
-      name: 'Etienne',
-      sex: 'Male',
-      location: 'Montreal, Canada',
-      learningLanguages: [],
-      languageSkills: [
+      avatarUrl: 'https://avatarurll.com',
+      nickname: 'dummy',
+      languages: [
         {
-          language: 'English',
-          level: 1,
+          id: 1,
+          name: 'spanish',
+        },
+        {
+          id: 2,
+          name: 'english',
         },
       ],
     };
 
-    const wrapper = shallow(<StudentCard student={mockStudent} />);
+    const wrapper = shallow(
+      <StudentCard
+        avatarUrl={mockStudent.avatarUrl}
+        languages={mockStudent.languages}
+        nickname={mockStudent.nickname}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

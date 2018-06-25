@@ -72,8 +72,8 @@ exports[`NewStudentForm renders correctly 1`] = `
         }
       }
     >
-      <UserAvatar
-        userId={1}
+      <ItalkiAvatar
+        italkiProfileId={1}
       />
     </div>
   </WithStyles(DialogContent)>

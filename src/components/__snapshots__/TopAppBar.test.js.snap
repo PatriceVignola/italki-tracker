@@ -29,6 +29,7 @@ exports[`TopAppBar renders correctly 1`] = `
     >
       Italki Tracker
     </WithStyles(Typography)>
+    <withState(withHandlers(mapProps(UserProfileMenu))) />
   </WithStyles(Toolbar)>
 </WithStyles(AppBar)>
 `;

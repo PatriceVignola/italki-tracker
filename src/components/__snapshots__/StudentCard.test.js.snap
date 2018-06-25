@@ -1,20 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StudentCard renders correctly 1`] = `
-<WithStyles(Paper)>
+<WithStyles(Paper)
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
   <WithStyles(Card)
     style={
       Object {
-        "height": 450,
-        "width": 300,
+        "height": "100%",
+        "width": "100%",
       }
     }
   >
     <WithStyles(CardMedia)
-      image="http://getdrawings.com/img/male-silhouette-images-2.jpg"
+      image="https://avatarurll.com"
       style={
         Object {
-          "height": 300,
+          "height": 250,
         }
       }
     />
@@ -22,31 +29,50 @@ exports[`StudentCard renders correctly 1`] = `
       <WithStyles(Typography)
         component="h2"
         gutterBottom={true}
+        style={
+          Object {
+            "overflow": "hidden",
+            "textOverflow": "ellipsis",
+            "whiteSpace": "nowrap",
+          }
+        }
         variant="headline"
       >
-        Etienne
+        dummy
       </WithStyles(Typography)>
       <WithStyles(Typography)
         component="p"
+        style={
+          Object {
+            "overflow": "hidden",
+            "textOverflow": "ellipsis",
+            "whiteSpace": "nowrap",
+          }
+        }
       >
-        <pure(LocationOn) />
-        Montreal, Canada
+        <pure(School)
+          style={
+            Object {
+              "marginRight": 10,
+            }
+          }
+        />
+        <span>
+          Learning: 
+        </span>
+        <span
+          key="1"
+        >
+          spanish
+          , 
+        </span>
+        <span
+          key="2"
+        >
+          english
+        </span>
       </WithStyles(Typography)>
     </WithStyles(CardContent)>
-    <WithStyles(CardActions)>
-      <WithStyles(Button)
-        color="primary"
-        size="small"
-      >
-        Cancel
-      </WithStyles(Button)>
-      <WithStyles(Button)
-        color="primary"
-        size="small"
-      >
-        OK
-      </WithStyles(Button)>
-    </WithStyles(CardActions)>
   </WithStyles(Card)>
 </WithStyles(Paper)>
 `;

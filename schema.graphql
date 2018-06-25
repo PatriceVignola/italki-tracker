@@ -1,5 +1,19 @@
 # source: http://localhost:4000/graphql
-# timestamp: Mon Jun 11 2018 15:31:15 GMT+0900 (KST)
+# timestamp: Mon Jun 25 2018 13:32:39 GMT+0900 (KST)
+
+input AddStudentData {
+  italkiId: Int!
+  skypeUsername: String
+  weChatUsername: String
+  email: String
+}
+
+type Document implements Node {
+  id: ID!
+  checksum: String!
+  fileName: String!
+  students: [Student]
+}
 
 enum Gender {
   Unspecified
@@ -7,11 +21,25 @@ enum Gender {
   Male
 }
 
-type Query {
-  user(id: ID!): User
+scalar Int52
+
+type ItalkiLanguage {
+  id: ID!
+  hasCourse: Boolean
+  canTeach: Boolean
+  name: String
+  level: ItalkiLanguageLevel
+  priority: Int
+  teaching: Boolean
+  learning: Boolean
 }
 
-type User {
+"""
+An integer between 1 and 7 (inclusive) representing the language level
+"""
+scalar ItalkiLanguageLevel
+
+type ItalkiProfile implements Node {
   id: ID!
   locale: String
   localTime: String
@@ -30,7 +58,7 @@ type User {
   timezoneUtc: String
   timezoneLocation: String
   timezoneIana: String
-  languages(level: UserLanguageLevel): [UserLanguage]
+  languages(level: ItalkiLanguageLevel, learning: Boolean, teaching: Boolean): [ItalkiLanguage]
   lastLoginTime: String
   firstPurchaseTime: String
   registerTime: String
@@ -53,18 +81,101 @@ type User {
   friendListPublic: Boolean
 }
 
-type UserLanguage {
-  id: ID!
-  hasCourse: Boolean
-  canTeach: Boolean
-  name: String
-  level: UserLanguageLevel
-  priority: Int
-  teaching: Boolean
-  learning: Boolean
+input LinkSkypeAccountData {
+  username: String!
+  password: String!
 }
 
-"""
-An integer between 1 and 7 (inclusive) representing the language level of a user
-"""
-scalar UserLanguageLevel
+type Mutation {
+  signin(data: SigninData!): User
+  signup(data: SignupData!): User
+  linkSkypeAccount(data: LinkSkypeAccountData!): SkypeTokens
+  signinToSkype(data: SigninToSkypeData!): SkypeTokens
+  addStudent(data: AddStudentData!): Student
+  sendDocument(data: SendDocumentData!): Document
+}
+
+interface Node {
+  id: ID!
+}
+
+type Query {
+  user: User
+  italkiProfile(id: ID!): ItalkiProfile
+  node(id: ID!): Node
+}
+
+input SendDocumentData {
+  studentId: ID!
+  checksum: String!
+  fileName: String!
+}
+
+input SigninData {
+  email: String!
+  password: String!
+}
+
+input SigninToSkypeData {
+  password: String!
+}
+
+input SignupData {
+  email: String!
+  password: String!
+}
+
+type SkypeLogin {
+  skypeToken: String
+  skypeTokenExpiration: Int52
+  registrationToken: String
+  registrationTokenExpiration: Int52
+}
+
+type SkypeProfile {
+  username: ID!
+  avatarUrl: String
+  birthday: String
+  city: String
+  countryCode: String
+  emails: [String]
+  firstName: String
+  gender: Gender
+  homePage: String
+  jobTitle: String
+  languageCode: String
+  lastName: String
+  namespace: String
+  phoneHome: String
+  phoneMobile: String
+  phoneOffice: String
+  province: String
+  richMood: String
+}
+
+type SkypeTokens {
+  skypeToken: String!
+  skypeTokenExpiration: Int52!
+  registrationToken: String!
+  registrationTokenExpiration: Int52!
+}
+
+type Student implements Node {
+  id: ID!
+  italkiId: Int!
+  skypeUsername: String
+  weChatUsername: String
+  email: String
+  italkiProfile: ItalkiProfile
+  skypeProfile: SkypeProfile
+  documents: [Document]
+}
+
+type User implements Node {
+  id: ID!
+  jwt: String
+  email: String!
+  skypeLogin: SkypeLogin
+  students: [Student]
+  documents: [Document]
+}

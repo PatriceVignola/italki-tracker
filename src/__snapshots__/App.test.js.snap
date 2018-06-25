@@ -1,34 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App renders correctly 1`] = `
-<Provider
-  store={
-    Object {
-      "dispatch": [Function],
-      "getState": [Function],
-      "replaceReducer": [Function],
-      "subscribe": [Function],
-      Symbol(observable): [Function],
-    }
-  }
->
-  <BrowserRouter>
-    <div>
-      <TopAppBar
-        onHamburgerClick={[Function]}
-      />
-      <LeftDrawer
-        onClose={[Function]}
-        open={false}
-      />
-      <Switch>
-        <Route
-          component={[Function]}
-          exact={true}
-          path="/"
-        />
-      </Switch>
-    </div>
-  </BrowserRouter>
-</Provider>
+<BrowserRouter>
+  <Switch>
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/signin"
+    />
+    <Route
+      component={[Function]}
+      path="/signup"
+    />
+    <Route
+      path="/"
+      render={[Function]}
+    />
+  </Switch>
+</BrowserRouter>
 `;

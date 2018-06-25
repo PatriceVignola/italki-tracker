@@ -13,7 +13,7 @@ import {
   TextField,
 } from '@material-ui/core/';
 
-import UserAvatar from './UserAvatar';
+import ItalkiAvatar from './ItalkiAvatar';
 
 type Props = {
   open?: boolean,
@@ -82,7 +82,7 @@ function NewStudentForm(props: Props) {
           />
         </div>
         <div style={styles.rightDiv}>
-          <UserAvatar userId={props.italkiId} />
+          <ItalkiAvatar italkiProfileId={props.italkiId} />
         </div>
       </DialogContent>
       <DialogActions>

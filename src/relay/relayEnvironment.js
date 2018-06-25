@@ -24,11 +24,21 @@ async function fetchQuery(operation: Operation, variables) {
     return cachedData;
   }
 
+  const authorization = localStorage.getItem('Authorization');
+  const skypeToken = localStorage.getItem('SkypeToken');
+  const registrationToken = localStorage.getItem('RegistrationToken');
+
+  const headers: any = {
+    'Content-Type': 'application/json',
+  };
+
+  authorization && (headers.Authorization = authorization);
+  skypeToken && (headers.SkypeToken = skypeToken);
+  registrationToken && (headers.RegistrationToken = registrationToken);
+
   const response = await fetch('http://localhost:4000/graphql', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify({
       query: operation.text,
       variables,

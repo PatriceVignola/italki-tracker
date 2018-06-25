@@ -13,39 +13,66 @@ exports[`StudentList renders correctly 1`] = `
   >
     Students
   </WithStyles(Typography)>
-  <GridWrapper
-    container={true}
-    spacing={16}
-    style={
+  <ReactRelayQueryRenderer
+    cacheConfig={
       Object {
-        "margin": 5,
+        "force": true,
       }
     }
-  >
-    <GridWrapper
-      item={true}
-      key="1"
-    >
-      <StudentCard
-        student={
-          Object {
-            "italkiId": 1,
-            "languageSkills": Array [
-              Object {
-                "language": "English",
-                "level": 1,
-              },
-            ],
-            "learningLanguages": Array [],
-            "location": "Montreal, Canada",
-            "name": "Etienne",
-            "sex": "Male",
-          }
-        }
-      />
-    </GridWrapper>
-  </GridWrapper>
-  <Connect(withState(withState(withState(withState(withHandlers(NewStudentForm))))))
+    environment={
+      RelayModernEnvironment {
+        "__setNet": [Function],
+        "_deferrableSelections": Set {},
+        "_network": Object {
+          "execute": [Function],
+        },
+        "_publishQueue": RelayPublishQueue {
+          "_appliedOptimisticUpdates": Set {},
+          "_backup": Object {},
+          "_handlerProvider": [Function],
+          "_pendingBackupRebase": false,
+          "_pendingData": Set {},
+          "_pendingOptimisticUpdates": Set {},
+          "_pendingUpdaters": Set {},
+          "_store": RelayMarkSweepStore {
+            "_gcEnabled": true,
+            "_hasScheduledGC": false,
+            "_index": 0,
+            "_recordSource": Object {},
+            "_roots": Map {},
+            "_subscriptions": Set {},
+            "_updatedRecordIDs": Object {},
+          },
+        },
+        "_store": RelayMarkSweepStore {
+          "_gcEnabled": true,
+          "_hasScheduledGC": false,
+          "_index": 0,
+          "_recordSource": Object {},
+          "_roots": Map {},
+          "_subscriptions": Set {},
+          "_updatedRecordIDs": Object {},
+        },
+        "configName": undefined,
+        "unstable_internal": Object {
+          "areEqualSelectors": [Function],
+          "createFragmentSpecResolver": [Function],
+          "createOperationSelector": [Function],
+          "getDataIDsFromObject": [Function],
+          "getFragment": [Function],
+          "getRequest": [Function],
+          "getSelector": [Function],
+          "getSelectorList": [Function],
+          "getSelectorsFromObject": [Function],
+          "getVariablesFromObject": [Function],
+        },
+      }
+    }
+    query={[Function]}
+    render={[Function]}
+    variables={Object {}}
+  />
+  <withState(withState(withState(withState(withHandlers(NewStudentForm)))))
     onClose={[Function]}
     open={true}
   />

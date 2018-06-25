@@ -4,70 +4,43 @@
  */
 
 import React from 'react';
-import {Provider} from 'react-redux';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import {createStore, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-import type {Store} from 'redux';
 
 import reducers from './reducers';
-import LeftDrawer from './components/LeftDrawer';
-import TopAppBar from './components/TopAppBar';
-import StudentListScreen from './components/ConnectedStudentList';
-import type {Action} from './actions/types';
+import Dashboard from './components/Dashboard';
+import SigninForm from './components/SigninForm';
+import SignupForm from './components/SignupForm';
 
-const initialState = {};
+const baseUrl: string = (process.env.PUBLIC_URL: any);
+const store = createStore(reducers, {}, applyMiddleware(thunk));
 
-type State = {
-  drawerOpen: boolean,
-};
+function App() {
+  const authorizationHeader = localStorage.getItem('Authorization');
 
-class App extends React.Component<{}, State> {
-  store: Store<Object, Action>;
-  handleDrawerOpen: () => void;
-  handleDrawerClose: () => void;
-
-  constructor() {
-    super();
-
-    this.store = createStore(reducers, initialState, applyMiddleware(thunk));
-
-    this.state = {
-      drawerOpen: false,
-    };
-
-    this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
-    this.handleDrawerClose = this.handleDrawerClose.bind(this);
-  }
-
-  handleDrawerOpen() {
-    this.setState({drawerOpen: true});
-  }
-
-  handleDrawerClose() {
-    this.setState({drawerOpen: false});
-  }
-
-  render() {
-    const baseUrl: string = (process.env.PUBLIC_URL: any);
-
+  if (!authorizationHeader || authorizationHeader.indexOf('Bearer ') !== 0) {
     return (
-      <Provider store={this.store}>
-        <BrowserRouter basename={baseUrl}>
-          <div>
-            <TopAppBar onHamburgerClick={this.handleDrawerOpen} />
-            <LeftDrawer
-              open={this.state.drawerOpen}
-              onClose={this.handleDrawerClose}
-            />
-            <Switch>
-              <Route exact path="/" component={StudentListScreen} />
-            </Switch>
-          </div>
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter basename={baseUrl}>
+        <Switch>
+          <Route exact path="/signin" component={SigninForm} />
+          <Route path="/signup" component={SignupForm} />
+          <Route path="/" render={() => <Redirect to="/signin" />} />
+        </Switch>
+      </BrowserRouter>
     );
   }
+
+  return (
+    <Provider store={store}>
+      <BrowserRouter basename={baseUrl}>
+        <Switch>
+          <Route path="/" component={Dashboard} />
+        </Switch>
+      </BrowserRouter>
+    </Provider>
+  );
 }
 
 export default App;

@@ -3,11 +3,10 @@
  * @flow
  */
 
-import {connect} from 'react-redux';
 import {compose, withHandlers, withState} from 'recompose';
 
 import NewStudentForm from './NewStudentForm';
-import saveNewStudentAsync from '../actions/saveNewStudentAsync';
+import addStudent from '../relay/mutations/AddStudent';
 import type {Student} from '../actions/types';
 
 type Props = {
@@ -29,37 +28,10 @@ type InputEvent = {
   },
 };
 
-const connectToStore = connect(
-  () => ({}),
-  {
-    saveNewStudent: saveNewStudentAsync,
-  },
-);
-
 const setHandlers = withHandlers({
-  onSave: ({
-    italkiId,
-    email,
-    skype,
-    wechat,
-    saveNewStudent,
-    onClose,
-  }: Props) => async () => {
+  onSave: ({italkiId, skype, wechat, email, onClose}: Props) => async () => {
     // TODO: Add loading indicator and "Undo" snack on the page
-
-    // TODO: Fetch name, sex, location, photoUrl, learningLanguages,
-    // languageSkills from https://www.italki.com/user/4981462
-    saveNewStudent({
-      italkiId,
-      email,
-      skype,
-      wechat,
-      name: 'DummyName',
-      sex: 'Male',
-      location: 'DummyLocation',
-      learningLanguages: [],
-      languageSkills: [],
-    });
+    addStudent(italkiId, skype, wechat, email);
 
     onClose();
   },
@@ -80,7 +52,6 @@ const setHandlers = withHandlers({
 });
 
 const enhance = compose(
-  connectToStore,
   withState('italkiId', 'setItalkiId', null),
   withState('email', 'setEmail', null),
   withState('skype', 'setSkype', null),

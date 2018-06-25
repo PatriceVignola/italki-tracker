@@ -11,6 +11,7 @@ import {compose, withHandlers, withState, mapProps, pure} from 'recompose';
 import type {HOC} from 'recompose';
 
 import signup from '../../relay/mutations/Signup';
+import ProgressButton from '../ProgressButton';
 
 type InputEvent = {
   target: {
@@ -27,8 +28,10 @@ type WithState = {
   setEmail: (email: string) => void,
   setPassword: (password: string) => void,
   setConfirmationPassword: (confirmationPassword: string) => void,
+  setProcessing: (processing: boolean) => void,
   email: string,
   password: string,
+  processing: boolean,
 } & InputProps;
 
 type WithHandlers = {
@@ -43,6 +46,7 @@ type Props = {
   handlePasswordChange: (event: InputEvent) => void,
   handleConfirmationPasswordChange: (event: InputEvent) => void,
   handleSignupClick: () => void,
+  processing: boolean,
 };
 
 function CreateAccountPage(props: Props) {
@@ -57,6 +61,7 @@ function CreateAccountPage(props: Props) {
         type="email"
         fullWidth
         onChange={props.handleEmailChange}
+        disabled={props.processing}
       />
 
       <div style={styles.passwordContainer}>
@@ -67,6 +72,7 @@ function CreateAccountPage(props: Props) {
           fullWidth
           style={styles.password}
           onChange={props.handlePasswordChange}
+          disabled={props.processing}
         />
 
         <TextField
@@ -76,6 +82,7 @@ function CreateAccountPage(props: Props) {
           fullWidth
           style={styles.confirmPassword}
           onChange={props.handleConfirmationPasswordChange}
+          disabled={props.processing}
         />
       </div>
 
@@ -85,17 +92,18 @@ function CreateAccountPage(props: Props) {
           style={styles.signinButton}
           component={Link}
           to="/signin"
+          disabled={props.processing}
         >
           Sign in with an existing account
         </Button>
-        <Button
-          variant="contained"
-          color="primary"
+
+        <ProgressButton
+          processing={props.processing}
           onClick={props.handleSignupClick}
         >
           <PersonAddIcon />
           <span style={styles.signupText}>Sign up</span>
-        </Button>
+        </ProgressButton>
       </div>
     </div>
   );
@@ -132,6 +140,7 @@ const enhance: HOC<*, InputProps> = compose(
   withState('email', 'setEmail', ''),
   withState('password', 'setPassword', ''),
   withState('confirmationPassword', 'setConfirmationPassword', ''),
+  withState('processing', 'setProcessing', false),
   withHandlers({
     handleEmailChange: ({setEmail}: WithState) => (event: InputEvent) => {
       setEmail(event.target.value);
@@ -147,10 +156,13 @@ const enhance: HOC<*, InputProps> = compose(
     handleSignupClick: (props: WithState) => async () => {
       // TODO: Add material ui inline button progress
       try {
+        props.setProcessing(true);
         await signup({email: props.email, password: props.password});
         props.onCompleted();
       } catch (error) {
         props.onError(error);
+      } finally {
+        props.setProcessing(false);
       }
     },
   }),
@@ -159,6 +171,7 @@ const enhance: HOC<*, InputProps> = compose(
     handleConfirmationPasswordChange: props.handleConfirmationPasswordChange,
     handlePasswordChange: props.handlePasswordChange,
     handleSignupClick: props.handleSignupClick,
+    processing: props.processing,
   })),
   pure,
 );

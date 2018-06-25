@@ -31,6 +31,7 @@ type WithState = {
   setProcessing: (processing: boolean) => void,
   email: string,
   password: string,
+  confirmationPassword: string,
   processing: boolean,
 } & InputProps;
 
@@ -156,6 +157,10 @@ const enhance: HOC<*, InputProps> = compose(
     handleSignupClick: (props: WithState) => async () => {
       // TODO: Add material ui inline button progress
       try {
+        if (props.password !== props.confirmationPassword) {
+          throw Error("The passwords don't match.");
+        }
+
         props.setProcessing(true);
         await signup({email: props.email, password: props.password});
         props.onCompleted();

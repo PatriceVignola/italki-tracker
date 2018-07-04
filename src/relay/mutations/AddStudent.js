@@ -15,26 +15,29 @@ type MutationResponse = {
 const mutation = graphql`
   mutation AddStudentMutation($input: AddStudentData!) {
     addStudent(data: $input) {
-      id
+      newStudentEdge {
+        node {
+          id
+          italkiProfile {
+            languages(learning: true) {
+              id
+              name
+            }
+            nickname
+            avatarUrl
+          }
+        }
+      }
     }
   }
 `;
-
-// https://medium.com/entria/wrangling-the-client-store-with-the-relay-modern-updater-function-5c32149a71ac
-// https://medium.com/@tamis.mike/relay-mutation-updater-part-1-basic-reading-and-editing-c2789c111c75
-
-const updater = proxyStore => {
-  /*
-  const payloadProxy = proxyStore.getRootField('addStudent');
-  const studentProxy = payloadProxy.getLinkedRecord('student');
-  */
-};
 
 async function addStudent(
   italkiId: number,
   skypeUsername: ?string,
   weChatUsername: ?string,
   email: ?string,
+  configs?: any,
 ) {
   const variables = {
     input: {italkiId, skypeUsername, weChatUsername, email},
@@ -44,7 +47,7 @@ async function addStudent(
     commitMutation(environment, {
       mutation,
       variables,
-      updater,
+      configs,
       onCompleted: (response: MutationResponse, errors) => {
         if (!errors) {
           resolve(response.addStudent.id);

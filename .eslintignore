@@ -1,5 +1,7 @@
 flow-typed/*
 coverage/*
 build/*
+config/*
+scripts/*
 src/registerServiceWorker.js
 *.min.js

@@ -15,6 +15,17 @@ type IncomingProps = {
     name: string,
   }[],
   avatarUrl: ?string,
+  student: {
+    __id: string,
+    italkiProfile: {
+      nickname: string,
+      languages: {
+        id: number,
+        name: string,
+      }[],
+      avatarUrl: ?string,
+    },
+  },
 };
 
 type NewProps = {

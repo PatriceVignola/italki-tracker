@@ -10,7 +10,7 @@ import type {HOC} from 'recompose';
 
 import LeftDrawer from './LeftDrawer';
 import TopAppBar from './TopAppBar';
-import StudentListScreen from './ConnectedStudentList';
+import StudentListPage from './StudentListPage';
 
 type WithState = {
   drawerOpen: boolean,
@@ -34,7 +34,7 @@ function Dashboard({drawerOpen, handleOpenDrawer, handleCloseDrawer}: Props) {
       <TopAppBar onHamburgerClick={handleOpenDrawer} />
       <LeftDrawer open={drawerOpen} onClose={handleCloseDrawer} />
       <Switch>
-        <Route exact path="/students" component={StudentListScreen} />
+        <Route exact path="/students" component={StudentListPage} />
         <Route path="/">
           <Redirect to="/students" />
         </Route>

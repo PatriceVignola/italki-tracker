@@ -14,6 +14,7 @@
     "flowtype",
     "prettier",
     "jsx-a11y",
+    "graphql",
   ],
   "env": {
     "jest": true,
@@ -33,6 +34,10 @@
     }],
     "no-unused-expressions": [2, { "allowShortCircuit": true }],
     "prettier/prettier": [2, "fb", "@format"],
+    "graphql/template-strings": [2, {
+      env: "relay",
+      tagName: "graphql",
+    }],
   },
 }
 

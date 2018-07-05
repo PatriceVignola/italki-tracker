@@ -8,7 +8,19 @@ import environment from '../relayEnvironment';
 
 type MutationResponse = {
   addStudent: {
-    id: string,
+    newStudentEdge: {
+      node: {
+        id: string,
+        italkiProfile: {
+          languages: {
+            id: number,
+            name: string,
+          },
+          nickname: string,
+          avatarUrl: string,
+        },
+      },
+    },
   },
 };
 
@@ -50,7 +62,7 @@ async function addStudent(
       configs,
       onCompleted: (response: MutationResponse, errors) => {
         if (!errors) {
-          resolve(response.addStudent.id);
+          resolve(response.addStudent.newStudentEdge.node.id);
         } else {
           reject(Error(errors[0].message));
         }

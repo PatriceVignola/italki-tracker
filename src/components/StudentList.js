@@ -29,15 +29,18 @@ type Props = {
   },
 };
 
-const StudentList = ({viewer}: Props) => (
-  <Grid container spacing={16} style={styles.grid}>
-    {viewer.students.edges.map(({node}) => (
-      <Grid item key={node.__id} style={styles.gridItem}>
-        <StudentCard student={node} />
-      </Grid>
-    ))}
-  </Grid>
-);
+const StudentList = ({viewer}: Props) => {
+  console.warn(viewer.students);
+  return (
+    <Grid container spacing={16} style={styles.grid}>
+      {viewer.students.edges.map(({node}) => (
+        <Grid item key={node.__id} style={styles.gridItem}>
+          <StudentCard student={node} />
+        </Grid>
+      ))}
+    </Grid>
+  );
+};
 
 const styles = {
   grid: {

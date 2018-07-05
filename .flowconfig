@@ -1,8 +1,9 @@
 [ignore]
+.*/__generated__/*
+.*/__snapshots__/*
 
 [include]
 <PROJECT_ROOT>/src/
-<PROJECT_ROOT>/server/
 
 [libs]
 

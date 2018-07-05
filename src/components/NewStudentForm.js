@@ -17,6 +17,7 @@ import type {HOC} from 'recompose';
 
 import addStudent from '../relay/mutations/AddStudent';
 import ItalkiAvatar from './ItalkiAvatar';
+import withError from './hoc/withError';
 
 type InputEvent = {
   target: {
@@ -35,10 +36,14 @@ type WithState = {
   email: string,
   skype: string,
   weChat: string,
+  errorOpen: boolean,
+  errorMessage: string,
   setItalkiId: (italkiId: number) => void,
   setEmail: (email: string) => void,
   setSkype: (skype: string) => void,
   setWeChat: (weChat: string) => void,
+  setErrorOpen: (open: boolean) => void,
+  setErrorMessage: (message: string) => void,
 } & InputProps;
 
 type WithHandlers = {
@@ -47,14 +52,15 @@ type WithHandlers = {
   handleEmailChange: (event: InputEvent) => void,
   handleSkypeChange: (event: InputEvent) => void,
   handleWeChatChange: (event: InputEvent) => void,
+  handleErrorClose: () => void,
 } & WithState;
 
 type Props = {
   handleSaveClick: () => void,
   handleItalkiIdChange: (event: InputEvent) => void,
-  handleEmailChange: (event: InputEvent) => void,
+  // handleEmailChange: (event: InputEvent) => void,
   handleSkypeChange: (event: InputEvent) => void,
-  handleWeChatChange: (event: InputEvent) => void,
+  // handleWeChatChange: (event: InputEvent) => void,
   onClose: () => void,
   italkiId: number,
   open: boolean,
@@ -74,6 +80,8 @@ function NewStudentForm(props: Props) {
             onChange={props.handleItalkiIdChange}
             fullWidth
           />
+          {/*
+          // TODO: Uncomment when feature is added
           <TextField
             margin="dense"
             label="Email Address (Optional)"
@@ -82,6 +90,7 @@ function NewStudentForm(props: Props) {
             onChange={props.handleEmailChange}
             fullWidth
           />
+          */}
           <TextField
             margin="dense"
             label="Skype Account (Optional)"
@@ -89,6 +98,8 @@ function NewStudentForm(props: Props) {
             onChange={props.handleSkypeChange}
             fullWidth
           />
+          {/*
+          // TODO: Uncomment when feature is added
           <TextField
             margin="dense"
             label="WeChat Account (Optional)"
@@ -96,6 +107,7 @@ function NewStudentForm(props: Props) {
             onChange={props.handleWeChatChange}
             fullWidth
           />
+          */}
         </div>
         <div style={styles.rightDiv}>
           <ItalkiAvatar italkiProfileId={props.italkiId} />
@@ -114,10 +126,12 @@ function NewStudentForm(props: Props) {
 }
 
 const enhance: HOC<*, InputProps> = compose(
-  withState('italkiId', 'setItalkiId', null),
-  withState('email', 'setEmail', null),
-  withState('skype', 'setSkype', null),
-  withState('wechat', 'setWechat', null),
+  withState('italkiId', 'setItalkiId', ''),
+  withState('email', 'setEmail', ''),
+  withState('skype', 'setSkype', ''),
+  withState('wechat', 'setWechat', ''),
+  withState('errorOpen', 'setErrorOpen', false),
+  withState('errorMessage', 'setErrorMessage', ''),
   withHandlers({
     handleSaveClick: (props: WithState) => async () => {
       // TODO: Add loading indicator and "Undo" snack on the page
@@ -135,14 +149,24 @@ const enhance: HOC<*, InputProps> = compose(
         },
       ];
 
-      addStudent(
-        props.italkiId,
-        props.skype,
-        props.weChat,
-        props.email,
-        configs,
-      );
-      props.onClose();
+      try {
+        if (Number.isNaN(props.italkiId)) {
+          throw Error('The italki ID must be a number.');
+        }
+
+        await addStudent(
+          props.italkiId,
+          props.skype,
+          props.weChat,
+          props.email,
+          configs,
+        );
+
+        props.onClose();
+      } catch (error) {
+        props.setErrorMessage(error.toString());
+        props.setErrorOpen(true);
+      }
     },
     handleItalkiIdChange: ({setItalkiId}: WithState) => (event: InputEvent) => {
       // TODO: Check if only integers
@@ -158,7 +182,15 @@ const enhance: HOC<*, InputProps> = compose(
     handleWeChatChange: ({setWeChat}: WithState) => (event: InputEvent) => {
       setWeChat(event.target.value);
     },
+    handleErrorClose: ({setErrorOpen}: WithState) => () => {
+      setErrorOpen(false);
+    },
   }),
+  withError(({errorMessage, errorOpen, handleErrorClose}: WithHandlers) => ({
+    message: errorMessage,
+    open: errorOpen,
+    onClose: handleErrorClose,
+  })),
   mapProps((props: WithHandlers) => ({
     handleSaveClick: props.handleSaveClick,
     handleItalkiIdChange: props.handleItalkiIdChange,

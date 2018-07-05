@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewStudentForm renders correctly 1`] = `
-<withState(withState(withState(withHandlers(mapProps(NewStudentForm)))))
-  italkiId={null}
+<withState(withState(withState(withState(withState(withHandlers(Component))))))
+  italkiId=""
   onClose={[Function]}
   onEmailChange={[Function]}
   onItalkiIdChange={[Function]}

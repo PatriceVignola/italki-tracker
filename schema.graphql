@@ -1,5 +1,5 @@
 # source: http://localhost:4000/graphql
-# timestamp: Fri Jun 29 2018 04:38:57 GMT+0900 (KST)
+# timestamp: Wed Jul 04 2018 18:53:33 GMT-0700 (PDT)
 
 input AddStudentData {
   italkiId: Int!
@@ -10,6 +10,14 @@ input AddStudentData {
 
 type AddStudentResult {
   newStudentEdge: StudentEdge!
+}
+
+input DeleteStudentData {
+  id: ID!
+}
+
+type DeleteStudentResult {
+  deletedStudentId: String
 }
 
 type Document implements Node {
@@ -93,6 +101,7 @@ type Mutation {
   linkSkypeAccount(data: LinkSkypeAccountData!): SkypeTokens
   signinToSkype(data: SigninToSkypeData!): SkypeTokens
   addStudent(data: AddStudentData!): AddStudentResult!
+  deleteStudent(data: DeleteStudentData): DeleteStudentResult!
   sendDocument(data: SendDocumentData!): Document
 }
 

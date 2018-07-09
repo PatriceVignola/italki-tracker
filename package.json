@@ -7,7 +7,7 @@
     "lint": "eslint .",
     "start-server": "cross-env REACT_APP_GRAPHQL_ENDPOINT=http://localhost:4000/graphql node scripts/start.js",
     "start": "run-p watch-schema watch-relay start-server",
-    "build": "cross-env REACT_APP_GRAPHQL_ENDPOINT=https://italki-tracker-api.patricevignola.com/graphql yarn relay && node scripts/build.js",
+    "build": "yarn relay && cross-env REACT_APP_GRAPHQL_ENDPOINT=https://italki-tracker-api.patricevignola.com/graphql node scripts/build.js",
     "prettier-lint": "prettier es6 --write src/**/*.js && eslint .",
     "watch-schema": "yarn get-schema --watch",
     "get-schema": "yarn graphql get-schema",

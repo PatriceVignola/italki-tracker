@@ -8,6 +8,7 @@
     "start-server": "node scripts/start.js",
     "start": "run-p watch-schema watch-relay start-server",
     "build": "yarn relay && node scripts/build.js",
+    "prettier-lint": "prettier es6 --write src/**/*.js && eslint .",
     "watch-schema": "yarn get-schema --watch",
     "get-schema": "yarn graphql get-schema",
     "watch-relay": "yarn relay --watch",
@@ -17,7 +18,7 @@
     "push-coverage": "coveralls < coverage/lcov.info",
     "predeploy": "yarn run build",
     "validate": "yarn relay && run-p flow test --silent",
-    "deploy": "yarn prettier && yarn validate && gh-pages -d build -m 'Deploy to gh-pages'"
+    "deploy": "yarn prettier-lint && yarn validate && gh-pages -d build -m 'Deploy to gh-pages'"
   },
   "lint-staged": {
     "*.{js,json,css}": [

@@ -14,6 +14,13 @@ import {
 const cache = new QueryResponseCache({size: 100, ttl: 1000000});
 
 async function fetchQuery(operation, variables, cacheConfig, uploadables) {
+  const endpoint = process.env.REACT_APP_GRAPHQL_ENDPOINT;
+
+  if (!endpoint) {
+    console.error('GRAPHQL_ENDPOINT environment variable must be set.');
+    return;
+  }
+
   const cachedData = cache.get(operation.text, variables);
 
   if (operation.operationKind !== 'mutation' && cachedData) {
@@ -51,7 +58,7 @@ async function fetchQuery(operation, variables, cacheConfig, uploadables) {
   skypeToken && (headers.SkypeToken = skypeToken);
   registrationToken && (headers.RegistrationToken = registrationToken);
 
-  const response = await fetch('http://localhost:4000/graphql', {
+  const response = await fetch(endpoint, {
     method: 'POST',
     headers,
     body,

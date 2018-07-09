@@ -10,7 +10,7 @@ import {withHandlers, withState, mapProps, pure, compose} from 'recompose';
 import type {HOC} from 'recompose';
 
 import signin from '../relay/mutations/Signin';
-import ErrorSnackbar from './ErrorSnackbar';
+import ResultSnackbar from './ResultSnackbar';
 
 type InputEvent = {
   target: {
@@ -90,10 +90,11 @@ function SigninForm(props: Props) {
           </div>
         </Paper>
       </div>
-      <ErrorSnackbar
+      <ResultSnackbar
         open={props.openError}
         message={props.errorMessage}
         onClose={props.handleErrorClose}
+        type="error"
       />
     </div>
   );

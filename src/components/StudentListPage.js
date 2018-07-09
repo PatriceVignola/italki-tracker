@@ -33,6 +33,7 @@ const StudentListPageQuery = graphql`
   query StudentListPageQuery {
     user {
       ...StudentList_viewer
+      ...NewStudentForm_viewer
     }
   }
 `;
@@ -50,7 +51,6 @@ const StudentListPage = (props: Props) => (
         if (result.error) {
           return <div>{result.error.message}</div>;
         }
-
         if (result.props) {
           return (
             <div>
@@ -59,7 +59,7 @@ const StudentListPage = (props: Props) => (
               <NewStudentForm
                 onClose={props.handleNewStudentFormClose}
                 open={props.newStudentFormOpen}
-                viewerId={result.props.user.__id}
+                viewer={result.props.user}
               />
 
               <AddStudentButton

@@ -7,27 +7,27 @@ import React from 'react';
 import {Snackbar, SnackbarContent} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import ErrorIcon from '@material-ui/icons/Error';
-import {compose, mapProps} from 'recompose';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import green from '@material-ui/core/colors/green';
+import {compose, pure} from 'recompose';
 import type {HOC} from 'recompose';
 
 type InputProps = {
   message: string,
   open: boolean,
   onClose: () => void,
+  type: 'error' | 'success',
 };
-
-type MapProps = {
-  classes: Object,
-} & InputProps;
 
 type Props = {
   open: boolean,
   onClose: () => void,
   message: string,
   classes: Object,
+  type: 'error' | 'success',
 };
 
-function ErrorSnackbar({open, message, onClose, classes}: Props) {
+function ResultSnackbar({open, message, onClose, classes, type}: Props) {
   return (
     <Snackbar
       anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
@@ -36,10 +36,12 @@ function ErrorSnackbar({open, message, onClose, classes}: Props) {
       onClose={onClose}
     >
       <SnackbarContent
-        className={classes.container}
+        className={classes[type]}
         message={
           <span className={classes.message}>
-            <ErrorIcon className={classes.messageIcon} />
+            {(type === 'error' && (
+              <ErrorIcon className={classes.messageIcon} />
+            )) || <CheckCircleIcon classname={classes.messageIcon} />}
             {message}
           </span>
         }
@@ -49,8 +51,11 @@ function ErrorSnackbar({open, message, onClose, classes}: Props) {
 }
 
 const styles = theme => ({
-  container: {
+  error: {
     backgroundColor: theme.palette.error.dark,
+  },
+  success: {
+    backgroundColor: green[600],
   },
   message: {
     display: 'flex',
@@ -67,12 +72,7 @@ const styles = theme => ({
 
 const enhance: HOC<*, InputProps> = compose(
   withStyles(styles),
-  mapProps(({open, onClose, message, classes}: MapProps) => ({
-    open,
-    onClose,
-    message,
-    classes,
-  })),
+  pure,
 );
 
-export default enhance(ErrorSnackbar);
+export default enhance(ResultSnackbar);

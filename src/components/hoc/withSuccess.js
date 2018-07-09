@@ -27,7 +27,7 @@ const withError = (
         message={message}
         open={open}
         onClose={onClose}
-        type="error"
+        type="success"
       />
     </div>
   );

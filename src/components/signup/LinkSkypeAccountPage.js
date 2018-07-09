@@ -134,7 +134,6 @@ const enhance: HOC<*, InputProps> = compose(
 
         props.onCompleted();
       } catch (error) {
-        props.setProcessing(false);
         props.onError(error);
       } finally {
         props.setProcessing(false);

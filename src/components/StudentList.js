@@ -6,11 +6,14 @@
 import React from 'react';
 import {Grid} from '@material-ui/core';
 import {graphql, createFragmentContainer} from 'react-relay';
+import {withHandlers} from 'recompose';
 
 import StudentCard from './StudentCard';
+import deleteStudent from '../relay/mutations/DeleteStudent';
 
-type Props = {
+type InputProps = {
   viewer: {
+    id: string,
     students: {
       edges: {
         node: {
@@ -29,18 +32,23 @@ type Props = {
   },
 };
 
-const StudentList = ({viewer}: Props) => {
-  console.warn(viewer.students);
-  return (
-    <Grid container spacing={16} style={styles.grid}>
-      {viewer.students.edges.map(({node}) => (
-        <Grid item key={node.__id} style={styles.gridItem}>
-          <StudentCard student={node} />
-        </Grid>
-      ))}
-    </Grid>
-  );
-};
+type Props = {
+  handleDeleteStudent: (studentId: string) => void,
+} & InputProps;
+
+const StudentList = ({viewer, handleDeleteStudent}: Props) => (
+  <Grid container spacing={16} style={styles.grid}>
+    {viewer.students.edges.map(({node}) => (
+      <Grid item key={node.__id} style={styles.gridItem}>
+        <StudentCard
+          student={node}
+          teacherId={viewer.id}
+          onDeleteStudent={handleDeleteStudent}
+        />
+      </Grid>
+    ))}
+  </Grid>
+);
 
 const styles = {
   grid: {
@@ -53,10 +61,35 @@ const styles = {
   },
 };
 
+const enhance = withHandlers({
+  handleDeleteStudent: (props: InputProps) => async (studentId: string) => {
+    const configs = [
+      {
+        type: 'RANGE_DELETE',
+        parentID: props.viewer.id,
+        connectionKeys: [
+          {
+            key: 'StudentCard_students',
+          },
+        ],
+        pathToConnection: ['user', 'students'],
+        deletedIDFieldName: 'deletedStudentId',
+      },
+      {
+        type: 'NODE_DELETE',
+        deletedIDFieldName: 'deletedStudentId',
+      },
+    ];
+
+    await deleteStudent({id: studentId}, configs);
+  },
+});
+
 export default createFragmentContainer(
-  StudentList,
+  enhance(StudentList),
   graphql`
     fragment StudentList_viewer on User {
+      id
       students(first: 1, last: 100)
         @connection(key: "StudentCard_students", filters: []) {
         edges {

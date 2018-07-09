@@ -141,7 +141,7 @@ const enhance: HOC<*, {}> = compose(
     handleSigninClick: (props: WithState) => async () => {
       try {
         await signin({email: props.email, password: props.password});
-        window.location.href = '/';
+        window.location.href = process.env.PUBLIC_URL;
       } catch (error) {
         props.setErrorMessage(error.toString());
         props.setOpenError(true);

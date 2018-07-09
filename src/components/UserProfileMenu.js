@@ -72,7 +72,7 @@ const enhance: HOC<*, {}> = compose(
     handleSignoutClick: ({setAnchorEl}: WithState) => () => {
       localStorage.clear();
       setAnchorEl(null);
-      window.location.href = '/';
+      window.location.href = process.env.PUBLIC_URL;
     },
   }),
   mapProps((props: WithHandlers) => ({

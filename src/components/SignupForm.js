@@ -115,7 +115,7 @@ const enhance: HOC<*, InputProps> = compose(
   withState('errorOpen', 'setErrorOpen', false),
   withHandlers({
     handleLinkCompleted: ({history}: WithState) => () => {
-      window.location.href = '/';
+      window.location.href = process.env.PUBLIC_URL;
     },
     handleCreateCompleted: (props: WithState) => () => {
       if (!props.animating) {

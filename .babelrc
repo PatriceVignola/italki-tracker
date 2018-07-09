@@ -5,6 +5,7 @@
   ],
   "plugins": [
     "relay",
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    "transform-regenerator"
   ]
 }

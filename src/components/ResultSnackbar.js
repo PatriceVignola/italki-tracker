@@ -41,7 +41,7 @@ function ResultSnackbar({open, message, onClose, classes, type}: Props) {
           <span className={classes.message}>
             {(type === 'error' && (
               <ErrorIcon className={classes.messageIcon} />
-            )) || <CheckCircleIcon classname={classes.messageIcon} />}
+            )) || <CheckCircleIcon className={classes.messageIcon} />}
             {message}
           </span>
         }
